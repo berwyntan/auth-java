@@ -12,13 +12,7 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    public List<User> allUsers() {
-        return userRepository.findAll();
-    }
     public Optional<User> verifyUser(String userName) {
         return userRepository.findUserByUserName(userName);
-    }
-    public Optional<User> verifyPassword(String password) {
-        return userRepository.findUserByPassword(password);
     }
 }
