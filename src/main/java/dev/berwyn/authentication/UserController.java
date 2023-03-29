@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@CrossOrigin(origins = "http://127.0.0.1:5173, http://127.0.0.1:5174")
 @RestController
 @RequestMapping("/auth")
 public class UserController {
@@ -16,24 +16,32 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<Optional<User>> login(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<User> login(@RequestBody Map<String, String> payload) {
 
         String userName = payload.get("userName");
         String password = payload.get("password");
 
         Optional<User> userExists = userService.verifyUser(userName);
 
-//        user exists
+        User userInfo = new User();
+
+//        if user exists
         if (!userExists.isEmpty()) {
 
             String dbPassword = userExists.get().GetPassword();
 //            compare passwords
             if (dbPassword.equals(password)) {
-                return new ResponseEntity<Optional<User>>(userExists, HttpStatus.OK);
+                userInfo.setUserName(userExists.get().getUserName());
+                userInfo.setUserFullName(userExists.get().getUserFullName());
+                userInfo.setRole(userExists.get().getRole());
+                userInfo.setId(userExists.get().getId());
+                return new ResponseEntity<User>(userInfo, HttpStatus.OK);
             } else {
-                return new ResponseEntity<Optional<User>>(Optional.empty(), HttpStatus.FORBIDDEN);
+                userInfo.setUserName(userExists.get().getUserName());
+                userInfo.setId(userExists.get().getId());
+                return new ResponseEntity<User>(userInfo, HttpStatus.FORBIDDEN);
             }
         }
-        return new ResponseEntity<Optional<User>>(Optional.empty(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<User>(userInfo, HttpStatus.NOT_FOUND);
     }
 }

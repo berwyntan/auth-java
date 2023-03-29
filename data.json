@@ -2,11 +2,13 @@
     {
         "userName": "testuser",
         "password": "12345",
-        "role": "user"
+        "role": "user",
+        "userFullName": "John"
     },
     {
-        "userName": "testadmin",
+        "userName": "testmanager",
         "password": "12345",
-        "role": "admin"
+        "role": "manager",
+        "userFullName": "Jane"
     }
 ]

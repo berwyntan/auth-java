@@ -17,6 +17,7 @@ public class User {
     private String userName;
     private String password;
     private String role;
+    private String userFullName;
 
     public String GetPassword() {
         return password;
