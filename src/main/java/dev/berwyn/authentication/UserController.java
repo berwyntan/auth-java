@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@CrossOrigin(origins = "http://127.0.0.1:5173, http://127.0.0.1:5174")
+@CrossOrigin(origins = {"https://auth-java-client.vercel.app", "http://127.0.0.1:5173"})
 @RestController
 @RequestMapping("/auth")
 public class UserController {
@@ -38,7 +38,6 @@ public class UserController {
                 return new ResponseEntity<User>(userInfo, HttpStatus.OK);
             } else {
                 userInfo.setUserName(userExists.get().getUserName());
-                userInfo.setId(userExists.get().getId());
                 return new ResponseEntity<User>(userInfo, HttpStatus.FORBIDDEN);
             }
         }
