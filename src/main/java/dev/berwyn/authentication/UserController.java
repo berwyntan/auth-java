@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@CrossOrigin(origins = {"https://auth-java-client.vercel.app", "http://127.0.0.1:5173"})
+@CrossOrigin(origins = {"https://auth-java-client.vercel.app"})
 @RestController
 @RequestMapping("/auth")
 public class UserController {
